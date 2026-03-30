@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CloudDesk</title>
+</head>
+<body>
+    <h1>CloudDesk Help Desk</h1>
+
+    <input id="title" placeholder="Title"><br><br>
+    <textarea id="description" placeholder="Description"></textarea><br><br>
+
+    <button onclick="submitTicket()">Submit Ticket</button>
+
+    <h2>Tickets</h2>
+    <ul id="tickets"></ul>
+
+    <script>
+        const API_BASE_URL = "http://32.194.158.217:5000";
+
+        async function submitTicket() {
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+
+            await fetch(`${API_BASE_URL}/tickets`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({title, description})
+            });
+
+            loadTickets();
+        }
+
+        async function loadTickets() {
+            const res = await fetch(`${API_BASE_URL}/tickets`);
+            const data = await res.json();
+
+            const list = document.getElementById("tickets");
+            list.innerHTML = "";
+
+            data.forEach(t => {
+                const li = document.createElement("li");
+                li.textContent = `${t.title} - ${t.status}`;
+                list.appendChild(li);
+            });
+        }
+
+        loadTickets();
+    </script>
+</body>
+</html>
