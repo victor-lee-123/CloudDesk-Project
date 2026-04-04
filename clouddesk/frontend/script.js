@@ -4,7 +4,7 @@
 
 // ─── Configuration ──────────────────────────
 // Your EC2 public IP — update this if the IP changes
-const API_BASE_URL = "http://32.194.158.217:5000";
+const API_BASE_URL = "http://3.238.196.68:5000";
 
 // ─── State ──────────────────────────────────
 let allTickets = [];
@@ -54,7 +54,13 @@ async function apiPost(endpoint, data) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        if (!res.ok) {
+            const text = await res.text();
+            console.error("Backend error:", text);
+            throw new Error(`HTTP ${res.status}: ${text}`);
+        }
+
         return await res.json();
     } catch (err) {
         console.error("API POST error:", err);
