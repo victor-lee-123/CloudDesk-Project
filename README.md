@@ -52,16 +52,17 @@ All services are containerised and managed using Docker Compose on AWS EC2.
 ---
 
 ## 📦 Project Structure
+```text
 clouddesk/
 │
-├── frontend/ # Static web files (index.html, JS, CSS)
-├── backend/ # Flask API application (app.py)
-├── mysql-init/ # Database initialisation scripts
-│ ├── schema.sql
-│ └── test.sql
-├── docker-compose.yml # Multi-container setup
+├── frontend/              # Static web files (index.html, JS, CSS)
+├── backend/               # Flask API application
+├── mysql-init/            # Database initialisation scripts
+│   ├── schema.sql
+│   └── test.sql
+├── docker-compose.yml     # Multi-container setup
 └── README.md
-
+```
 ---
 
 ## 🐳 Setup & Installation
