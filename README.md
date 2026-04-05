@@ -93,12 +93,12 @@ clouddesk/
 ---
 
 ## 👥 Team Members
-Victor Lee Meng Hui
-Belinda Chua Jia Xuan
-Nurul Hannah
-Edwin Leow
-Dylan Lau
-Teo Joel
+- Victor Lee Meng Hui
+- Belinda Chua Jia Xuan
+- Nurul Hannah
+- Edwin Leow
+- Dylan Lau
+- Teo Joel
 
 ---
 
