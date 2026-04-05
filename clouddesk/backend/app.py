@@ -4,6 +4,13 @@ import mysql.connector
 import os
 
 app = Flask(__name__)
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from passlib.hash import pbkdf2_sha256
+
+# Setup JWT
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "fallback-secret")
+jwt = JWTManager(app)
+
 CORS(app)
 
 def get_db_connection():
@@ -143,13 +150,14 @@ def get_ticket(ticket_id):
     return jsonify(ticket)
 
 @app.route("/tickets", methods=["POST"])
+@jwt_required() # <--- Protect this route
 def create_ticket():
     data = request.get_json() or {}
+    current_user_id = get_jwt_identity() # <--- Get ID from token
 
     title = (data.get("title") or "").strip()
     description = (data.get("description") or "").strip()
-    user_id = 1
-    priority = "medium"
+    priority = data.get("priority", "medium")
     status = "open"
 
     if not title:
@@ -235,25 +243,92 @@ def add_ticket_response(ticket_id):
     return jsonify({"message": "Response added successfully"}), 201
 
 @app.route("/admin/tickets", methods=["GET"])
+@jwt_required() # This ensures only logged-in users can even hit this line
 def admin_get_tickets():
+    # 1. Identify who is logged in from their token
+    current_user_id = get_jwt_identity()
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute("""
-        SELECT
-            t.*,
-            u.name AS submitted_by,
-            a.name AS assigned_admin
-        FROM tickets t
-        JOIN users u ON t.user_id = u.id
-        LEFT JOIN users a ON t.assigned_to = a.id
-        ORDER BY t.created_at DESC
-    """)
-    tickets = [format_ticket(row) for row in cursor.fetchall()]
+    try:
+        # 2. Check if the logged-in user is actually an admin in the database
+        cursor.execute("SELECT role FROM users WHERE id = %s", (current_user_id,))
+        user_record = cursor.fetchone()
 
+        if not user_record or user_record["role"] != "admin":
+            return jsonify({"error": "Unauthorized. Admin access required."}), 403
+
+        # 3. If they are an admin, proceed with the original query to get all tickets
+        cursor.execute("""
+            SELECT 
+                t.*, 
+                u.name AS submitted_by, 
+                a.name AS assigned_admin
+            FROM tickets t
+            JOIN users u ON t.user_id = u.id
+            LEFT JOIN users a ON t.assigned_to = a.id
+            ORDER BY t.created_at DESC
+        """)
+        
+        rows = cursor.fetchall()
+        tickets = [format_ticket(row) for row in rows]
+
+        return jsonify(tickets), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+    role = data.get("role", "user") # Default to regular user
+
+    if not email or not password:
+        return jsonify({"error": "Email and password required"}), 400
+
+    hashed_pw = pbkdf2_sha256.hash(password)
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(
+            "INSERT INTO users (name, email, password_hash, role) VALUES (%s, %s, %s, %s)",
+            (name, email, hashed_pw, role)
+        )
+        conn.commit()
+        return jsonify({"message": "User registered successfully"}), 201
+    except Exception as e:
+        return jsonify({"error": "Email already exists"}), 400
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+    user = cursor.fetchone()
     cursor.close()
     conn.close()
-    return jsonify(tickets)
+
+    if user and pbkdf2_sha256.verify(password, user["password_hash"]):
+        # Create token containing the user ID and role
+        access_token = create_access_token(identity=str(user["id"]), additional_claims={"role": user["role"]})
+        return jsonify({"token": access_token, "role": user["role"]}), 200
+
+    return jsonify({"error": "Invalid credentials"}), 401
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
