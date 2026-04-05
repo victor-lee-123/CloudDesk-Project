@@ -297,6 +297,27 @@ def create_ticket():
         conn.close()
 
 
+@app.route("/tickets/<int:ticket_id>", methods=["DELETE"])
+@jwt_required()
+def delete_ticket(ticket_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        # Optional: Check if user is admin or the owner before deleting
+        cursor.execute("DELETE FROM tickets WHERE id = %s", (ticket_id,))
+        conn.commit()
+        
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Ticket not found"}), 404
+            
+        return jsonify({"message": "Ticket deleted successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+
 @app.route("/tickets/<int:ticket_id>/status", methods=["PATCH"])
 @jwt_required()
 def update_ticket_status(ticket_id):

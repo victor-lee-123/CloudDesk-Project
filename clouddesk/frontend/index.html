@@ -19,7 +19,6 @@
             transition: opacity 0.25s;
         }
         .modal-overlay.open { opacity: 1; pointer-events: all; }
-
         .modal {
             background: var(--surface, #fff);
             border-radius: 18px;
@@ -28,20 +27,13 @@
             box-shadow: 0 24px 60px rgba(0,0,0,0.18);
             transform: translateY(18px) scale(0.97);
             transition: transform 0.28s cubic-bezier(.22,1,.36,1);
-            position: relative;
         }
         .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-
-        .modal-logo {
-            display: flex; align-items: center; gap: .6rem;
-            margin-bottom: 1.6rem;
-        }
+        .modal-logo { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.6rem; }
         .modal-logo svg { color: var(--primary, #3b82f6); }
         .modal-logo span { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; }
-
         .modal h2 { font-size: 1.35rem; font-weight: 700; margin: 0 0 .3rem; }
         .modal .modal-sub { color: var(--text-muted, #6b7280); font-size: .9rem; margin-bottom: 1.6rem; }
-
         .modal .form-group { margin-bottom: 1rem; }
         .modal label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; }
         .modal input {
@@ -52,11 +44,7 @@
             outline: none; transition: border-color .15s, box-shadow .15s;
             box-sizing: border-box;
         }
-        .modal input:focus {
-            border-color: var(--primary, #3b82f6);
-            box-shadow: 0 0 0 3px rgba(59,130,246,.12);
-        }
-
+        .modal input:focus { border-color: var(--primary, #3b82f6); box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
         .modal-btn {
             width: 100%; padding: .8rem;
             background: var(--primary, #3b82f6);
@@ -65,19 +53,9 @@
             margin-top: .4rem; transition: background .15s, transform .1s;
         }
         .modal-btn:hover { background: #2563eb; }
-        .modal-btn:active { transform: scale(.98); }
         .modal-btn:disabled { opacity: .65; cursor: not-allowed; }
-
-        .modal-switch {
-            text-align: center; margin-top: 1.2rem;
-            font-size: .88rem; color: var(--text-muted, #6b7280);
-        }
-        .modal-switch a {
-            color: var(--primary, #3b82f6);
-            font-weight: 600; cursor: pointer; text-decoration: none;
-        }
-        .modal-switch a:hover { text-decoration: underline; }
-
+        .modal-switch { text-align: center; margin-top: 1.2rem; font-size: .88rem; color: var(--text-muted, #6b7280); }
+        .modal-switch a { color: var(--primary, #3b82f6); font-weight: 600; cursor: pointer; }
         .modal-error {
             background: #fef2f2; border: 1px solid #fecaca;
             color: #b91c1c; border-radius: 8px;
@@ -86,13 +64,9 @@
         }
         .modal-error.show { display: block; }
 
-        /* ── Navbar auth area ───────────────────────────────────────────── */
+        /* ── Navbar ─────────────────────────────────────────────────────── */
         .nav-auth { display: flex; align-items: center; gap: .75rem; }
-        .nav-user-name {
-            font-size: .9rem; font-weight: 600;
-            color: var(--text, #111827);
-            white-space: nowrap;
-        }
+        .nav-user-name { font-size: .9rem; font-weight: 600; color: var(--text, #111827); white-space: nowrap; }
         .btn-ghost {
             background: none; border: 1.5px solid var(--border, #e5e7eb);
             border-radius: 8px; padding: .45rem .9rem;
@@ -100,17 +74,180 @@
             color: var(--text, #111827); transition: background .15s;
         }
         .btn-ghost:hover { background: var(--bg, #f3f4f6); }
-
         .btn-auth-login {
             background: var(--primary, #3b82f6); color: #fff;
             border: none; border-radius: 8px; padding: .45rem 1rem;
             font-size: .88rem; font-weight: 600; cursor: pointer;
+        }
+        .nav-links { display: flex; align-items: center; gap: .25rem; }
+
+        /* ── Admin Dashboard ─────────────────────────────────────────────── */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: calc(100vh - 64px - 56px);
+        }
+        .admin-sidebar {
+            background: #0f172a;
+            padding: 1.5rem 1rem;
+            display: flex; flex-direction: column; gap: .25rem;
+        }
+        .admin-sidebar-title {
+            font-size: .7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .1em; color: #475569;
+            padding: .5rem .75rem; margin-bottom: .25rem;
+        }
+        .admin-nav-item {
+            display: flex; align-items: center; gap: .75rem;
+            padding: .65rem .75rem; border-radius: 8px;
+            font-size: .9rem; font-weight: 500; color: #94a3b8;
+            cursor: pointer; transition: background .15s, color .15s;
+            border: none; background: none; width: 100%; text-align: left;
+        }
+        .admin-nav-item:hover { background: #1e293b; color: #e2e8f0; }
+        .admin-nav-item.active { background: #1d4ed8; color: #fff; }
+        .admin-main { background: #f8fafc; padding: 2rem 2.5rem; overflow-y: auto; }
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
+        .admin-page-title { font-size: 1.4rem; font-weight: 700; margin: 0 0 .25rem; color: #0f172a; }
+        .admin-page-sub { color: #64748b; font-size: .9rem; margin-bottom: 1.75rem; }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem; margin-bottom: 1.75rem;
+        }
+        .admin-stat {
+            background: #fff; border-radius: 12px; padding: 1.1rem 1.25rem;
+            border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+        }
+        .admin-stat-label { font-size: .75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .3rem; }
+        .admin-stat-value { font-size: 1.9rem; font-weight: 800; line-height: 1; }
+        .asv-blue { color: #2563eb; } .asv-amber { color: #d97706; }
+        .asv-purple { color: #7c3aed; } .asv-green { color: #059669; }
+
+        .admin-table-wrap {
+            background: #fff; border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,.04); overflow: hidden;
+        }
+        .admin-table-toolbar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 1.25rem; border-bottom: 1px solid #f1f5f9; gap: 1rem; flex-wrap: wrap;
+        }
+        .admin-table-toolbar h3 { font-size: 1rem; font-weight: 700; margin: 0; color: #0f172a; }
+        .admin-search {
+            display: flex; align-items: center; gap: .5rem;
+            background: #f8fafc; border: 1.5px solid #e2e8f0;
+            border-radius: 8px; padding: .4rem .75rem;
+        }
+        .admin-search input { border: none; background: none; outline: none; font-size: .88rem; color: #0f172a; width: 200px; }
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            text-align: left; font-size: .72rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .06em;
+            color: #64748b; padding: .75rem 1.25rem;
+            background: #f8fafc; border-bottom: 1px solid #e2e8f0;
+        }
+        td { padding: .85rem 1.25rem; border-bottom: 1px solid #f1f5f9; font-size: .88rem; color: #334155; vertical-align: middle; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8fafc; }
+        .td-title { font-weight: 600; color: #0f172a; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .td-id { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: #64748b; }
+
+        .status-select {
+            border: 1.5px solid #e2e8f0; border-radius: 7px;
+            padding: .3rem .55rem; font-size: .82rem; font-weight: 600;
+            cursor: pointer; outline: none; background: #f8fafc;
+        }
+        .btn-manage {
+            background: #0f172a; color: #fff; border: none;
+            border-radius: 7px; padding: .38rem .85rem;
+            font-size: .82rem; font-weight: 600; cursor: pointer;
             transition: background .15s;
         }
-        .btn-auth-login:hover { background: #2563eb; }
+        .btn-manage:hover { background: #1e293b; }
 
-        /* hide nav links when not logged in */
-        .nav-links { display: flex; align-items: center; gap: .25rem; }
+        /* Admin ticket detail */
+        .admin-back-btn {
+            display: flex; align-items: center; gap: .4rem;
+            background: none; border: none; cursor: pointer;
+            font-size: .88rem; font-weight: 600; color: #64748b;
+            padding: 0; margin-bottom: 1.25rem; transition: color .15s;
+        }
+        .admin-back-btn:hover { color: #0f172a; }
+        .admin-detail-panel {
+            background: #fff; border-radius: 14px;
+            border: 1px solid #e2e8f0; padding: 1.75rem;
+        }
+        .admin-detail-panel h2 { font-size: 1.2rem; font-weight: 700; margin: 0 0 .5rem; color: #0f172a; }
+        .admin-detail-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; margin-bottom: 1.25rem; font-size: .85rem; color: #64748b; }
+        .admin-desc {
+            background: #f8fafc; border-radius: 10px; padding: 1rem 1.25rem;
+            color: #334155; font-size: .93rem; line-height: 1.65;
+            margin-bottom: 1.5rem; border: 1px solid #e2e8f0;
+        }
+        .admin-actions-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .admin-status-label { font-size: .85rem; font-weight: 600; color: #334155; }
+        .admin-status-full {
+            border: 1.5px solid #e2e8f0; border-radius: 8px;
+            padding: .45rem .85rem; font-size: .88rem; font-weight: 600;
+            cursor: pointer; outline: none; background: #f8fafc;
+        }
+        .btn-update-status {
+            background: #0f172a; color: #fff; border: none;
+            border-radius: 8px; padding: .5rem 1.1rem;
+            font-size: .88rem; font-weight: 600; cursor: pointer;
+        }
+        .btn-update-status:hover { background: #1e293b; }
+
+        .admin-responses { margin-bottom: 1.5rem; }
+        .admin-responses h4 { font-size: .95rem; font-weight: 700; margin-bottom: .75rem; color: #0f172a; }
+        .resp-bubble { padding: .85rem 1rem; border-radius: 10px; margin-bottom: .6rem; font-size: .9rem; line-height: 1.55; }
+        .resp-bubble.admin-resp { background: #eff6ff; border: 1px solid #bfdbfe; }
+        .resp-bubble.user-resp  { background: #f8fafc; border: 1px solid #e2e8f0; }
+        .resp-bubble-meta { font-size: .78rem; color: #64748b; margin-bottom: .3rem; display: flex; gap: .5rem; align-items: center; }
+        .resp-bubble-meta strong { color: #0f172a; }
+        .role-pill { font-size: .65rem; font-weight: 700; text-transform: uppercase; padding: .1rem .4rem; border-radius: 99px; background: #e2e8f0; color: #475569; }
+        .role-pill.admin { background: #dbeafe; color: #1d4ed8; }
+
+        .admin-reply-box h4 { font-size: .95rem; font-weight: 700; margin-bottom: .6rem; color: #0f172a; }
+        .admin-reply-box textarea {
+            width: 100%; box-sizing: border-box;
+            border: 1.5px solid #e2e8f0; border-radius: 10px;
+            padding: .75rem 1rem; font-size: .9rem; resize: vertical;
+            outline: none; font-family: inherit; background: #f8fafc;
+            min-height: 90px;
+        }
+        .admin-reply-box textarea:focus { border-color: #3b82f6; background: #fff; }
+        .btn-send-reply {
+            margin-top: .6rem;
+            background: #2563eb; color: #fff; border: none;
+            border-radius: 8px; padding: .55rem 1.25rem;
+            font-size: .9rem; font-weight: 600; cursor: pointer;
+            display: inline-flex; align-items: center; gap: .4rem;
+        }
+        .btn-send-reply:hover { background: #1d4ed8; }
+        .btn-send-reply:disabled { opacity: .6; cursor: not-allowed; }
+
+        /* Users */
+        .user-avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: #dbeafe; color: #1d4ed8;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: .85rem; flex-shrink: 0;
+        }
+        .user-cell { display: flex; align-items: center; gap: .65rem; }
+        .role-badge-admin { background: #fee2e2; color: #991b1b; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 99px; text-transform: uppercase; }
+        .role-badge-user  { background: #e0e7ff; color: #3730a3; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 99px; text-transform: uppercase; }
+        .table-empty { text-align: center; padding: 3rem 1rem; color: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .admin-layout { grid-template-columns: 1fr; }
+            .admin-sidebar { flex-direction: row; overflow-x: auto; padding: .75rem; }
+            .admin-sidebar-title { display: none; }
+            .admin-main { padding: 1.25rem; }
+        }
     </style>
 </head>
 <body>
@@ -128,8 +265,6 @@
                 </svg>
                 <span>CloudDesk</span>
             </div>
-
-            <!-- LOGIN FORM -->
             <div id="modal-login">
                 <h2>Welcome back</h2>
                 <p class="modal-sub">Sign in to manage your support tickets.</p>
@@ -145,8 +280,6 @@
                 <button class="modal-btn" id="login-btn" onclick="doLogin()">Sign In</button>
                 <p class="modal-switch">Don't have an account? <a onclick="switchModal('register')">Create one</a></p>
             </div>
-
-            <!-- REGISTER FORM -->
             <div id="modal-register" style="display:none">
                 <h2>Create account</h2>
                 <p class="modal-sub">Join CloudDesk to submit and track your tickets.</p>
@@ -184,9 +317,8 @@
                 </span>
                 <span class="logo-text">CloudDesk</span>
             </a>
-
             <div class="nav-links" id="nav-links" style="display:none">
-                <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">
+                <a href="#" class="nav-link" data-page="home" onclick="showPage('home')">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     Home
                 </a>
@@ -198,11 +330,12 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                     My Tickets
                 </a>
+                <a href="#" class="nav-link" data-page="admin" id="nav-admin-link" onclick="showPage('admin')" style="display:none">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    Admin
+                </a>
             </div>
-
-            <div class="nav-auth" id="nav-auth">
-                <!-- Populated by JS depending on auth state -->
-            </div>
+            <div class="nav-auth" id="nav-auth"></div>
         </div>
     </nav>
 
@@ -217,7 +350,7 @@
             <div class="hero-content">
                 <span class="hero-badge">Support Center</span>
                 <h1 class="hero-title">How can we<br><span class="highlight">help you</span> today?</h1>
-                <p class="hero-subtitle">Submit a ticket and our team will get back to you as soon as possible. Track your requests in real time.</p>
+                <p class="hero-subtitle">Submit a ticket and our team will get back to you as soon as possible.</p>
                 <div class="hero-actions">
                     <button class="btn btn-primary btn-lg" onclick="requireAuth(() => showPage('submit'))">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -229,27 +362,20 @@
                 </div>
             </div>
         </section>
-
         <section class="features-section">
             <div class="features-grid">
-                <div class="feature-card" style="--delay: 0">
-                    <div class="feature-icon" style="--accent: #3b82f6">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
+                <div class="feature-card" style="--delay:0">
+                    <div class="feature-icon" style="--accent:#3b82f6"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                     <h3>Secure & Reliable</h3>
                     <p>Your tickets are safely stored in the cloud with encrypted connections and automatic backups.</p>
                 </div>
-                <div class="feature-card" style="--delay: 1">
-                    <div class="feature-icon" style="--accent: #10b981">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    </div>
+                <div class="feature-card" style="--delay:1">
+                    <div class="feature-icon" style="--accent:#10b981"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
                     <h3>Real-Time Tracking</h3>
                     <p>Monitor the status of your support requests from submission to resolution.</p>
                 </div>
-                <div class="feature-card" style="--delay: 2">
-                    <div class="feature-icon" style="--accent: #f59e0b">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
+                <div class="feature-card" style="--delay:2">
+                    <div class="feature-icon" style="--accent:#f59e0b"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
                     <h3>Fast Responses</h3>
                     <p>Our support team reviews and responds to tickets promptly through the admin dashboard.</p>
                 </div>
@@ -264,14 +390,12 @@
                 <h1>Submit a New Ticket</h1>
                 <p>Describe your issue and we'll get back to you shortly.</p>
             </div>
-
             <div class="form-card">
                 <div class="form-group">
                     <label for="ticket-title">Title</label>
                     <input type="text" id="ticket-title" placeholder="Brief summary of your issue" maxlength="255">
                     <span class="form-hint">Keep it concise — e.g. "Login page not loading"</span>
                 </div>
-
                 <div class="form-group">
                     <label for="ticket-priority">Priority</label>
                     <select id="ticket-priority" style="width:100%;padding:.7rem 1rem;border:1.5px solid var(--border,#e5e7eb);border-radius:10px;font-size:.95rem;background:var(--bg,#f9fafb);outline:none;">
@@ -280,12 +404,10 @@
                         <option value="high">High</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="ticket-desc">Description</label>
-                    <textarea id="ticket-desc" rows="6" placeholder="Provide details about your issue, including steps to reproduce if applicable..."></textarea>
+                    <textarea id="ticket-desc" rows="6" placeholder="Provide details about your issue..."></textarea>
                 </div>
-
                 <div class="form-actions">
                     <button class="btn btn-secondary" onclick="clearForm()">Clear</button>
                     <button class="btn btn-primary" id="submit-btn" onclick="submitTicket()">
@@ -297,7 +419,7 @@
         </div>
     </main>
 
-    <!-- ===== PAGE: TICKETS LIST ===== -->
+    <!-- ===== PAGE: MY TICKETS ===== -->
     <main id="page-tickets" class="page">
         <div class="page-container">
             <div class="page-header">
@@ -310,24 +432,21 @@
                     New Ticket
                 </button>
             </div>
-
             <div class="filters-bar">
                 <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all" onclick="filterTickets('all', this)">All</button>
-                    <button class="filter-tab" data-filter="Open" onclick="filterTickets('Open', this)">Open</button>
-                    <button class="filter-tab" data-filter="In Progress" onclick="filterTickets('In Progress', this)">In Progress</button>
-                    <button class="filter-tab" data-filter="Resolved" onclick="filterTickets('Resolved', this)">Resolved</button>
-                    <button class="filter-tab" data-filter="Closed" onclick="filterTickets('Closed', this)">Closed</button>
+                    <button class="filter-tab active" data-filter="all" onclick="filterTickets('all',this)">All</button>
+                    <button class="filter-tab" data-filter="Open" onclick="filterTickets('Open',this)">Open</button>
+                    <button class="filter-tab" data-filter="In Progress" onclick="filterTickets('In Progress',this)">In Progress</button>
+                    <button class="filter-tab" data-filter="Resolved" onclick="filterTickets('Resolved',this)">Resolved</button>
+                    <button class="filter-tab" data-filter="Closed" onclick="filterTickets('Closed',this)">Closed</button>
                 </div>
                 <div class="search-box">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     <input type="text" id="search-input" placeholder="Search tickets..." oninput="searchTickets(this.value)">
                 </div>
             </div>
-
             <div class="ticket-stats" id="ticket-stats"></div>
             <div id="tickets-list" class="tickets-list"></div>
-
             <div id="empty-state" class="empty-state" style="display:none;">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 <h3>No tickets yet</h3>
@@ -337,7 +456,7 @@
         </div>
     </main>
 
-    <!-- ===== PAGE: TICKET DETAIL ===== -->
+    <!-- ===== PAGE: TICKET DETAIL (user) ===== -->
     <main id="page-detail" class="page">
         <div class="page-container">
             <button class="back-link" onclick="showPage('tickets')">
@@ -348,16 +467,91 @@
         </div>
     </main>
 
-    <!-- ===== TOAST ===== -->
-    <div id="toast-container"></div>
+    <!-- ===== PAGE: ADMIN DASHBOARD ===== -->
+    <main id="page-admin" class="page">
+        <div class="admin-layout">
+            <aside class="admin-sidebar">
+                <div class="admin-sidebar-title">Admin Panel</div>
+                <button class="admin-nav-item active" id="anav-overview" onclick="showAdminSection('overview')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Overview
+                </button>
+                <button class="admin-nav-item" id="anav-tickets" onclick="showAdminSection('tickets')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    All Tickets
+                </button>
+                <button class="admin-nav-item" id="anav-users" onclick="showAdminSection('users')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Users
+                </button>
+            </aside>
+            <div class="admin-main">
 
-    <!-- ===== FOOTER ===== -->
+                <!-- OVERVIEW -->
+                <div class="admin-section active" id="admin-section-overview">
+                    <h1 class="admin-page-title">Dashboard Overview</h1>
+                    <p class="admin-page-sub">Live summary of all support activity.</p>
+                    <div class="admin-stats" id="admin-stats-grid"></div>
+                    <div class="admin-table-wrap">
+                        <div class="admin-table-toolbar"><h3>Recent Tickets</h3></div>
+                        <table>
+                            <thead><tr><th>ID</th><th>Title</th><th>Submitted By</th><th>Priority</th><th>Status</th><th>Created</th></tr></thead>
+                            <tbody id="admin-recent-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ALL TICKETS -->
+                <div class="admin-section" id="admin-section-tickets">
+                    <div id="admin-tickets-list-view">
+                        <h1 class="admin-page-title">All Tickets</h1>
+                        <p class="admin-page-sub">Click "Manage" on any ticket to update its status or send a reply.</p>
+                        <div class="admin-table-wrap">
+                            <div class="admin-table-toolbar">
+                                <h3>Tickets</h3>
+                                <div class="admin-search">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                    <input type="text" id="admin-search" placeholder="Search title or user…" oninput="filterAdminTickets(this.value)">
+                                </div>
+                            </div>
+                            <table>
+                                <thead><tr><th>ID</th><th>Title</th><th>Submitted By</th><th>Priority</th><th>Status</th><th>Created</th><th></th></tr></thead>
+                                <tbody id="admin-tickets-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="admin-ticket-detail-view" style="display:none">
+                        <button class="admin-back-btn" onclick="backToAdminList()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all tickets
+                        </button>
+                        <div class="admin-detail-panel" id="admin-detail-panel"></div>
+                    </div>
+                </div>
+
+                <!-- USERS -->
+                <div class="admin-section" id="admin-section-users">
+                    <h1 class="admin-page-title">All Users</h1>
+                    <p class="admin-page-sub">Every registered account on CloudDesk.</p>
+                    <div class="admin-table-wrap">
+                        <div class="admin-table-toolbar"><h3>Users</h3></div>
+                        <table>
+                            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
+                            <tbody id="admin-users-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
     <footer class="footer">
         <div class="footer-inner">
             <p>&copy; 2025 CloudDesk &mdash; CSD3156 Cloud Computing Project</p>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
