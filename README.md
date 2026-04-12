@@ -70,22 +70,20 @@ clouddesk/
 
 ### 🏃 Quick Start (Run Locally)
 1. Clone the repository
-git clone <your-repo-link>
-cd clouddesk
+- git clone <your-repo-link>
+- cd clouddesk
 
 2. Install Docker
 Make sure Docker is installed:
-docker --version
-docker compose version
+- docker --version
+- docker compose version
 
 3. Run the application
-docker compose up --build
+- docker compose up --build
 
 4. Open in browser
-Frontend:
-http://localhost:8080
-Backend:
-http://localhost:5000
+- Frontend: http://localhost:8080
+- Backend: http://localhost:5000
 
 ### ☁️ Deploying on AWS EC2
 1. Launch EC2 Instance
