@@ -87,35 +87,33 @@ Make sure Docker is installed:
 
 ### ☁️ Deploying on AWS EC2
 1. Launch EC2 Instance
-Ubuntu
-Allow ports:
-22 (SSH)
-8080 (frontend)
-5000 (backend)
+- Ubuntu
+- Allow ports: 22 (SSH), 8080 (frontend), 5000 (backend)
 
 2. Connect via SSH
-ssh -i your-key.pem ubuntu@your-ec2-ip
+- ssh -i your-key.pem ubuntu@your-ec2-ip
 
 3. Install Docker
-sudo apt update
-sudo apt install -y docker.io docker-compose-v2
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo usermod -aG docker $USER
-newgrp docker
+- sudo apt update
+- sudo apt install -y docker.io docker-compose-v2
+- sudo systemctl start docker
+- sudo systemctl enable docker
+- sudo usermod -aG docker $USER
+- newgrp docker
 
 4. Upload project (choose one)
-Option A: Git clone
-git clone <your-repo-link>
-cd clouddesk
-Option B: SCP (manual copy)
-scp -i your-key.pem -r clouddesk ubuntu@your-ec2-ip:~
+- Option A: Git clone
+- git clone <your-repo-link>
+- cd clouddesk
+
+- Option B: SCP (manual copy)
+- scp -i your-key.pem -r clouddesk ubuntu@your-ec2-ip:~
 
 5. Run the application
-docker compose up --build -d
+- docker compose up --build -d
 
 6. Access your app
-http://your-ec2-ip:8080
+- http://your-ec2-ip:8080
 
 ---
 
