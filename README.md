@@ -68,7 +68,7 @@ clouddesk/
 ## 🐳 Setup & Installation
 ### You can choose to run locally, or via EC2 Instance. Instructions shown below.
 
-###⚡ Quick Start (Run Locally)
+### 🏃 Quick Start (Run Locally)
 1. Clone the repository
 git clone <your-repo-link>
 cd clouddesk
