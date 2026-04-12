@@ -102,6 +102,7 @@ Make sure Docker is installed:
 - newgrp docker
 
 4. Upload project (choose one)
+
 Option A: Git clone
 - git clone <your-repo-link>
 - cd clouddesk
