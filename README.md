@@ -102,11 +102,11 @@ Make sure Docker is installed:
 - newgrp docker
 
 4. Upload project (choose one)
-- Option A: Git clone
+Option A: Git clone
 - git clone <your-repo-link>
 - cd clouddesk
 
-- Option B: SCP (manual copy)
+Option B: SCP (manual copy)
 - scp -i your-key.pem -r clouddesk ubuntu@your-ec2-ip:~
 
 5. Run the application
