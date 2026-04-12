@@ -66,12 +66,58 @@ clouddesk/
 ---
 
 ## 🐳 Setup & Installation
+### You can choose to run locally, or via EC2 Instance. Instructions shown below.
 
-### Prerequisites
+###⚡ Quick Start (Run Locally)
+1. Clone the repository
+git clone <your-repo-link>
+cd clouddesk
 
-- Docker
-- Docker Compose
-- AWS EC2 instance (Ubuntu recommended)
+2. Install Docker
+Make sure Docker is installed:
+docker --version
+docker compose version
+
+3. Run the application
+docker compose up --build
+
+4. Open in browser
+Frontend:
+http://localhost:8080
+Backend:
+http://localhost:5000
+
+### ☁️ Deploying on AWS EC2
+1. Launch EC2 Instance
+Ubuntu
+Allow ports:
+22 (SSH)
+8080 (frontend)
+5000 (backend)
+
+2. Connect via SSH
+ssh -i your-key.pem ubuntu@your-ec2-ip
+
+3. Install Docker
+sudo apt update
+sudo apt install -y docker.io docker-compose-v2
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+4. Upload project (choose one)
+Option A: Git clone
+git clone <your-repo-link>
+cd clouddesk
+Option B: SCP (manual copy)
+scp -i your-key.pem -r clouddesk ubuntu@your-ec2-ip:~
+
+5. Run the application
+docker compose up --build -d
+
+6. Access your app
+http://your-ec2-ip:8080
 
 ---
 
@@ -104,6 +150,12 @@ clouddesk/
 
 ## 📄 License
 
-This project is developed for academic purposes. Created at Singapore Institute of Technology ©. Please contact me at veekterlee@gmail.com for licensing / more info.
+This project is developed as part of a Cloud Computing project using containerised microservices architecture. Created at Singapore Institute of Technology© in Collaboration with Digipen Institute of Technology©.
+
+---
+
+## ⭐ If you find this useful
+
+Feel free to fork, use, or improve it for your own projects!
 
 ---
