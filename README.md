@@ -156,3 +156,8 @@ This project is developed as part of a Cloud Computing project using containeris
 Feel free to fork, use, or improve it for your own projects!
 
 ---
+
+## More Info
+[![Architecture diagram of victor-lee-123/clouddesk-project](https://gitdiagram.com/victor-lee-123/clouddesk-project/diagram.png)](https://gitdiagram.com/victor-lee-123/clouddesk-project?utm_source=readme&utm_medium=picture)
+
+[![Architecture diagram](https://gitdiagram.com/diagram-badge.svg)](https://gitdiagram.com/victor-lee-123/clouddesk-project?utm_source=readme&utm_medium=badge)
